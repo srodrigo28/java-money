@@ -2,18 +2,19 @@ package com.java100.domain.activity.type;
 
 public class Type {
 
-    public enum ActivityType{
+    public enum ActivityType {
         REVENUE("revenue"),
         EXPENSE("expense");
 
         private String value;
 
-        ActivityType(final String aValue){
+        ActivityType(final String aValue) {
             this.value = aValue;
         }
 
-        public String getValue(){
+        public String getValue() {
             return this.value;
         }
     }
+
 }

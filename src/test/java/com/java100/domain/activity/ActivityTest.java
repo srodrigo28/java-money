@@ -11,18 +11,18 @@ import com.java100.manager.utils.InstantUtils;
 
 public class ActivityTest {
     
-    // Given
+   // Given
     // When
     // Then
     @Test
-    public void givenActivity(){
+    public void givenValidParams_whenBuildingNewActivity_thenReturnNewValidActivity() {
 
         final var aDescription = "A description";
         final var aValue = 3.55f;
         final var aDate = InstantUtils.now();
         final var aType = ActivityType.REVENUE;
 
-        final var anActivity = Activity.newActivity(null, null, 0, null);
+        final var anActivity = Activity.newActivity(aDate, aDescription, aValue, aType);
 
         assertNotNull(anActivity);
         assertNotNull(anActivity.getId());
@@ -31,7 +31,8 @@ public class ActivityTest {
         assertEquals(aDate, anActivity.getDate());
         assertEquals(aValue, anActivity.getValue(), 0.001);
         assertEquals(aType, anActivity.getType());
-        assertNotNull(anActivity.getCreatAt());
-        assertNotNull(anActivity.getUpdateAt());
+        assertNotNull(anActivity.getCreatedAt());
+        assertNotNull(anActivity.getUpdatedAt());
     }
+
 }

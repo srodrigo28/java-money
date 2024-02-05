@@ -1,138 +1,115 @@
 package com.java100.domain.activity;
 
-import com.java100.domain.activity.type.Type;
-import com.java100.manager.utils.InstantUtils;
-
 import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
+import com.java100.domain.activity.type.Type.ActivityType;
+import com.java100.manager.utils.InstantUtils;
+
+
 public class Activity {
-    
+
     private String id;
     private Instant date;
     private String description;
     private float value;
-    private Type type;
-    private Instant creatAt;
-    private Instant updateAt;
+    private ActivityType type;
+    private Instant createdAt;
+    private Instant updatedAt;
 
-    private Activity(
-        final String anId,
-        final Instant aDate,
-        final String aDescription,
-        final float aValue,
-        final Type aType,
-        final Instant aCreatedAt,
-        final Instant anUpdatedAt
-    ){
+    private Activity(final String anId, final Instant aDate, final String aDescription,
+            final float aValue, final ActivityType aType, final Instant aCreatedAt,
+            final Instant anUpdatedAt) {
         this.id = anId;
         this.date = aDate;
         this.description = aDescription;
         this.value = aValue;
         this.type = aType;
-        this.creatAt = aCreatedAt;
-        this.creatAt = anUpdatedAt;
+        this.createdAt = aCreatedAt;
+        this.updatedAt = anUpdatedAt;
+
+        // this.validate();
     }
 
-    public static Activity newActivity(
-        final Instant aDate, 
-        final String aDescription, 
-        final float aValue,
-        final Type aType
-    ) {
-        return new Activity(
-            UUID.randomUUID().toString().toLowerCase(),
-            aDate,
-            aDescription,
-            aValue,
-            aType,
-            InstantUtils.now(),
-            Instant.now().truncatedTo(ChronoUnit.MICROS)
-        );
-    } 
+    public static Activity newActivity(final Instant aDate, final String aDescription,
+            final float aValue, final ActivityType aType) {
 
-    public static Activity with(
-        final String anId,
-        final Instant aDate,
-        final String aDescription,
-        final float aValue,
-        final Type aType,
-        final Instant aCreatedAt,
-        final Instant anUpdatedAt
-    ) {
         return new Activity(
-            anId, 
-            aDate, 
-            aDescription, 
-            aValue, aType, 
-            aCreatedAt, 
-            anUpdatedAt
-        );
+                UUID.randomUUID().toString().toLowerCase(),
+                aDate,
+                aDescription,
+                aValue,
+                aType,
+                InstantUtils.now(),
+                InstantUtils.now());
     }
 
+    public static Activity with(final String anId, final Instant aDate, final String aDescription,
+            final float aValue, final ActivityType aType, final Instant aCreatedAt,
+            final Instant anUpdatedAt) {
+                
+        return new Activity(
+                anId,
+                aDate,
+                aDescription,
+                aValue,
+                aType,
+                aCreatedAt,
+                anUpdatedAt);
+    }
+/** CRIANDO VALIDAÇÕES
+    private void validate() {
+
+        if (this.id.isBlank()) {
+            throw new DomainException("Activity's ID should not be blank");
+        } else if (this.id.length() != 36) {
+            throw new DomainException("Activity's ID should be a valid UUID");
+        } else if (this.description.isBlank()) {
+            throw new DomainException("Activity's description should not be blank");
+        } else if (this.description.length() < 3) {
+            throw new DomainException("Activity's description should have at least 3 characters");
+        } else if (this.type != ActivityType.EXPENSE && this.type != ActivityType.REVENUE) {
+            throw new DomainException("Activity's type should be either expense or revenue");
+        } else if (this.value < 0.01) {
+            throw new DomainException("Activity's value should be greater than zero");
+        } else if (this.createdAt.isAfter(this.updatedAt)) {
+            throw new DomainException("Activity's created at should be before updated at");
+        }
+    }
+*/
+    
     public String getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public Instant getDate() {
         return date;
     }
 
-    public void setDate(Instant date) {
-        this.date = date;
-    }
-
     public String getDescription() {
         return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public float getValue() {
         return value;
     }
 
-    public void setValue(float value) {
-        this.value = value;
-    }
-
-    public Type getType() {
+    public ActivityType getType() {
         return type;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    public Instant getCreatedAt() {
+        return createdAt;
     }
 
-    public Instant getCreatAt() {
-        return creatAt;
-    }
-
-    public void setCreatAt(Instant creatAt) {
-        this.creatAt = creatAt;
-    }
-
-    public Instant getUpdateAt() {
-        return updateAt;
-    }
-
-    public void setUpdateAt(Instant updateAt) {
-        this.updateAt = updateAt;
+    public Instant getUpdatedAt() {
+        return updatedAt;
     }
 
     @Override
     public String toString() {
-        return "Activity [id=" + id + ", date=" + date + ", description=" + 
-            description + ", value=" + value + ", type="
-            + type + ", creatAt=" + creatAt + ", updateAt=" + updateAt + "]"
-        ;
+        return "Activity [id=" + id + ", date=" + date + ", description=" + description + ", value=" + value + ", type="
+                + type + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
     }
-    
+
 }
