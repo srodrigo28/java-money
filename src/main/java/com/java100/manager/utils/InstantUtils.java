@@ -1,4 +1,4 @@
-package com.java100.domain.manager.utils;
+package com.java100.manager.utils;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;

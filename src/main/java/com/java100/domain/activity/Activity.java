@@ -1,7 +1,7 @@
 package com.java100.domain.activity;
 
 import com.java100.domain.activity.type.Type;
-import com.java100.domain.manager.utils.InstantUtils;
+import com.java100.manager.utils.InstantUtils;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -32,6 +32,7 @@ public class Activity {
         this.value = aValue;
         this.type = aType;
         this.creatAt = aCreatedAt;
+        this.creatAt = anUpdatedAt;
     }
 
     public static Activity newActivity(
